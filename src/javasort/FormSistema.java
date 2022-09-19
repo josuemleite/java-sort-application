@@ -1,6 +1,7 @@
 package javasort;
 
 import java.io.*;
+import static java.lang.Integer.parseInt;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -31,6 +32,7 @@ public class FormSistema extends javax.swing.JFrame {
         lblProx = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         icon = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         btnOrdNome = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -42,17 +44,24 @@ public class FormSistema extends javax.swing.JFrame {
         opSeq = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Sistema de Ordenação - YuGiOh!");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 255));
 
         lblProx.setFont(new java.awt.Font("Segoe UI Black", 0, 36)); // NOI18N
         lblProx.setForeground(new java.awt.Color(255, 255, 255));
-        lblProx.setText("Duelo Rápido de Yu-Gi-Oh");
+        lblProx.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javasort/duel-yugioh.gif"))); // NOI18N
+        lblProx.setText("d");
         lblProx.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javasort/yu-gi-oh.gif"))); // NOI18N
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javasort/logo.png"))); // NOI18N
+        jLabel2.setText("jLabel2");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -61,31 +70,34 @@ public class FormSistema extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(jLabel1)
-                .addGap(80, 80, 80)
-                .addComponent(lblProx)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(lblProx, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(icon, javax.swing.GroupLayout.PREFERRED_SIZE, 513, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(icon)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblProx, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(icon)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(165, 165, 165)
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(icon))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblProx)
-                .addGap(124, 124, 124))
         );
 
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 0, 1200, 309));
+
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(41, 43, 45)), "Dados", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Light", 0, 24))); // NOI18N
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Light", 0, 24))); // NOI18N
 
         btnOrdNome.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
-        btnOrdNome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javasort/check-list (1).png"))); // NOI18N
+        btnOrdNome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javasort/check-list.png"))); // NOI18N
         btnOrdNome.setText("Ordenar");
         btnOrdNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -106,7 +118,7 @@ public class FormSistema extends javax.swing.JFrame {
 
         cbOrdena.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Data", "Nome", "Categoria", "Nível", "Ataque", "Defesa", " " }));
 
-        txtBusca.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(41, 43, 45)), "Dados para busca", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Light", 0, 14))); // NOI18N
+        txtBusca.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados para busca", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Light", 0, 14))); // NOI18N
 
         btnBusca.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         btnBusca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javasort/task.png"))); // NOI18N
@@ -130,7 +142,7 @@ public class FormSistema extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 879, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(btnOrdNome, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
@@ -151,9 +163,9 @@ public class FormSistema extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
                         .addComponent(cbOrdena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnOrdNome, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
+                        .addGap(26, 26, 26)
                         .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -162,28 +174,10 @@ public class FormSistema extends javax.swing.JFrame {
                         .addGap(23, 23, 23)
                         .addComponent(btnBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 315, -1, -1));
 
         pack();
         setLocationRelativeTo(null);
@@ -265,8 +259,23 @@ public class FormSistema extends javax.swing.JFrame {
 
     private void btnBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscaActionPerformed
         int cont = 0;
-        switch (cbOrdena.getSelectedIndex()) {
+        switch (cbOrdena.getSelectedIndex()) 
+        {
             case 0:
+                if (opSeq.isSelected()) {
+                    for (Dados d : lista) {
+                        cont++;
+                        if (d.getEnglishName().equalsIgnoreCase(txtBusca.getText())) {
+                            JOptionPane.showMessageDialog(null, "Carta encontrada " + cont + " comparações");
+                            break;
+                        }
+                    }
+                } else {
+                    Dados d = new Dados();
+                    d.setEnglishName(txtBusca.getText());
+                    int pos = Collections.binarySearch(lista, d, compareDate); // int pos = Collections.binarySearch(lista,d,compareTempMax);
+                    JOptionPane.showMessageDialog(null, "Carta encontrada, posicao " + (pos + 1));
+                }
                 break;
             case 1:
                 if (opSeq.isSelected()) {
@@ -281,10 +290,72 @@ public class FormSistema extends javax.swing.JFrame {
                     Dados d = new Dados();
                     d.setEnglishName(txtBusca.getText());
                     int pos = Collections.binarySearch(lista, d, compareName); // int pos = Collections.binarySearch(lista,d,compareTempMax);
-                    JOptionPane.showMessageDialog(null, "Carta encontrada, posicao " + pos);
+                    JOptionPane.showMessageDialog(null, "Carta encontrada, posicao " + (pos + 1));
                 }
                 break;
             case 2:
+                if (opSeq.isSelected()) {
+                    for (Dados d : lista) {
+                        cont++;
+                        if ((Integer.parseInt(txtBusca.getText())) == d.getCategory()) {
+                            JOptionPane.showMessageDialog(null, "A primeira carta desta categoria foi encontrada! " + cont + " comparações");
+                            break;
+                        }
+                    }
+                } else {
+                    Dados d = new Dados();
+                    d.setCategory(Integer.parseInt(txtBusca.getText()));
+                    int pos = Collections.binarySearch(lista, d, compareCategory); // int pos = Collections.binarySearch(lista,d,compareTempMax);
+                    JOptionPane.showMessageDialog(null, "Há valores repetidos (cartas com a mesma categoria) para a busca binária...");
+                }
+                break;
+            case 3:
+                if (opSeq.isSelected()) {
+                    for (Dados d : lista) {
+                        cont++;
+                        if ((Integer.parseInt(txtBusca.getText())) == d.getLevel()) {
+                            JOptionPane.showMessageDialog(null, "A primeira carta deste nível foi encontrada! " + cont + " comparações");
+                            break;
+                        }
+                    }
+                } else {
+                    Dados d = new Dados();
+                    d.setCategory(Integer.parseInt(txtBusca.getText()));
+                    int pos = Collections.binarySearch(lista, d, compareLevel); // int pos = Collections.binarySearch(lista,d,compareTempMax);
+                    JOptionPane.showMessageDialog(null, "Há valores repetidos (cartas com o mesmo level) para a busca binária...");
+                }
+                break;
+            case 4:
+                if (opSeq.isSelected()) {
+                    for (Dados d : lista) {
+                        cont++;
+                        if ((Integer.parseInt(txtBusca.getText())) == d.getAttack()) {
+                            JOptionPane.showMessageDialog(null, "A primeira carta com este poder de ataque foi encontrada! " + cont + " comparações");
+                            break;
+                        }
+                    }
+                } else {
+                    Dados d = new Dados();
+                    d.setCategory(Integer.parseInt(txtBusca.getText()));
+                    int pos = Collections.binarySearch(lista, d, compareAttack); // int pos = Collections.binarySearch(lista,d,compareTempMax);
+                    JOptionPane.showMessageDialog(null, "Há valores repetidos (cartas com o mesmo poder de ataque) para a busca binária...");
+                }
+                break;
+            case 5:
+                if (opSeq.isSelected()) {
+                    for (Dados d : lista) {
+                        cont++;
+                        if ((Integer.parseInt(txtBusca.getText())) == d.getDefense()) {
+                            JOptionPane.showMessageDialog(null, "A primeira carta com este poder de defesa foi encontrada! " + cont + " comparações");
+                            break;
+                        }
+                    }
+                } else {
+                    Dados d = new Dados();
+                    d.setCategory(Integer.parseInt(txtBusca.getText()));
+                    int pos = Collections.binarySearch(lista, d, compareDefense); // int pos = Collections.binarySearch(lista,d,compareTempMax);
+                    JOptionPane.showMessageDialog(null, "Há valores repetidos (cartas com o mesmo poder de defesa) para a busca binária...");
+                }
                 break;
             default:
                 JOptionPane.showMessageDialog(null, "Em construção!");
@@ -306,6 +377,7 @@ public class FormSistema extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbOrdena;
     private javax.swing.JLabel icon;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
