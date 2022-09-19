@@ -1,7 +1,6 @@
 package javasort;
 
 import java.io.*;
-import static java.lang.Integer.parseInt;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -94,7 +93,7 @@ public class FormSistema extends javax.swing.JFrame {
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 0, 1200, 309));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Light", 0, 24))); // NOI18N
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(41, 43, 45)), "Dados", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Light", 0, 24))); // NOI18N
 
         btnOrdNome.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         btnOrdNome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javasort/check-list.png"))); // NOI18N
@@ -118,7 +117,7 @@ public class FormSistema extends javax.swing.JFrame {
 
         cbOrdena.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Data", "Nome", "Categoria", "Nível", "Ataque", "Defesa", " " }));
 
-        txtBusca.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados para busca", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Light", 0, 14))); // NOI18N
+        txtBusca.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(41, 43, 45)), "Dados para busca", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Light", 0, 14))); // NOI18N
 
         btnBusca.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         btnBusca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javasort/task.png"))); // NOI18N
@@ -214,7 +213,7 @@ public class FormSistema extends javax.swing.JFrame {
 
         DefaultTableModel model = (DefaultTableModel) tabelaDados.getModel();
         Object rowData[] = new Object[10];
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy", Locale.ENGLISH);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.ENGLISH);
 
         for (Dados d : lista) {
             rowData[0] = d.getReleaseDate().format(formatter);
@@ -259,21 +258,25 @@ public class FormSistema extends javax.swing.JFrame {
 
     private void btnBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscaActionPerformed
         int cont = 0;
-        switch (cbOrdena.getSelectedIndex()) 
-        {
+        switch (cbOrdena.getSelectedIndex()) {
             case 0:
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.ENGLISH);
                 if (opSeq.isSelected()) {
                     for (Dados d : lista) {
                         cont++;
-                        if (d.getEnglishName().equalsIgnoreCase(txtBusca.getText())) {
+                        String tempDate = txtBusca.getText();
+                        LocalDate localDate = LocalDate.parse(tempDate, formatter);
+                        if (d.getReleaseDate().equals(localDate)) {
                             JOptionPane.showMessageDialog(null, "Carta encontrada " + cont + " comparações");
                             break;
                         }
                     }
                 } else {
                     Dados d = new Dados();
-                    d.setEnglishName(txtBusca.getText());
-                    int pos = Collections.binarySearch(lista, d, compareDate); // int pos = Collections.binarySearch(lista,d,compareTempMax);
+                    String tempDate = txtBusca.getText();
+                    LocalDate localDate = LocalDate.parse(tempDate, formatter);
+                    d.setReleaseDate(localDate);
+                    int pos = Collections.binarySearch(lista, d, compareDate);
                     JOptionPane.showMessageDialog(null, "Carta encontrada, posicao " + (pos + 1));
                 }
                 break;
@@ -289,7 +292,7 @@ public class FormSistema extends javax.swing.JFrame {
                 } else {
                     Dados d = new Dados();
                     d.setEnglishName(txtBusca.getText());
-                    int pos = Collections.binarySearch(lista, d, compareName); // int pos = Collections.binarySearch(lista,d,compareTempMax);
+                    int pos = Collections.binarySearch(lista, d, compareName);
                     JOptionPane.showMessageDialog(null, "Carta encontrada, posicao " + (pos + 1));
                 }
                 break;
@@ -305,8 +308,8 @@ public class FormSistema extends javax.swing.JFrame {
                 } else {
                     Dados d = new Dados();
                     d.setCategory(Integer.parseInt(txtBusca.getText()));
-                    int pos = Collections.binarySearch(lista, d, compareCategory); // int pos = Collections.binarySearch(lista,d,compareTempMax);
-                    JOptionPane.showMessageDialog(null, "Há valores repetidos (cartas com a mesma categoria) para a busca binária...");
+                    int pos = Collections.binarySearch(lista, d, compareCategory);
+                    JOptionPane.showMessageDialog(null, "Carta encontrada, posicao " + (pos + 1));
                 }
                 break;
             case 3:
@@ -321,8 +324,8 @@ public class FormSistema extends javax.swing.JFrame {
                 } else {
                     Dados d = new Dados();
                     d.setCategory(Integer.parseInt(txtBusca.getText()));
-                    int pos = Collections.binarySearch(lista, d, compareLevel); // int pos = Collections.binarySearch(lista,d,compareTempMax);
-                    JOptionPane.showMessageDialog(null, "Há valores repetidos (cartas com o mesmo level) para a busca binária...");
+                    int pos = Collections.binarySearch(lista, d, compareLevel);
+                    JOptionPane.showMessageDialog(null, "Carta encontrada, posicao " + (pos + 1));
                 }
                 break;
             case 4:
@@ -337,8 +340,8 @@ public class FormSistema extends javax.swing.JFrame {
                 } else {
                     Dados d = new Dados();
                     d.setCategory(Integer.parseInt(txtBusca.getText()));
-                    int pos = Collections.binarySearch(lista, d, compareAttack); // int pos = Collections.binarySearch(lista,d,compareTempMax);
-                    JOptionPane.showMessageDialog(null, "Há valores repetidos (cartas com o mesmo poder de ataque) para a busca binária...");
+                    int pos = Collections.binarySearch(lista, d, compareAttack);
+                    JOptionPane.showMessageDialog(null, "Carta encontrada, posicao " + (pos + 1));
                 }
                 break;
             case 5:
@@ -353,15 +356,15 @@ public class FormSistema extends javax.swing.JFrame {
                 } else {
                     Dados d = new Dados();
                     d.setCategory(Integer.parseInt(txtBusca.getText()));
-                    int pos = Collections.binarySearch(lista, d, compareDefense); // int pos = Collections.binarySearch(lista,d,compareTempMax);
-                    JOptionPane.showMessageDialog(null, "Há valores repetidos (cartas com o mesmo poder de defesa) para a busca binária...");
+                    int pos = Collections.binarySearch(lista, d, compareDefense);
+                    JOptionPane.showMessageDialog(null, "Carta encontrada, posicao " + (pos + 1));
                 }
                 break;
             default:
                 JOptionPane.showMessageDialog(null, "Em construção!");
         }
     }//GEN-LAST:event_btnBuscaActionPerformed
-    
+
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
