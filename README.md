@@ -42,7 +42,7 @@ Projeto desenvolvido durante a disciplina **Estrutura de Dados I**, no curso Bac
 ## ⚙️ Funcionalidades
 
 - [x] O usuário pode ordenar as cartas por diferentes tipos.
-- [x] O usuário tem controle nos produtos contidos na lista, podendo acessá-los em quaisquer posições.
+- [x] O usuário pode buscar por uma carta utilizando uma busca sequencial ou uma busca binária.
 
 ---
 
