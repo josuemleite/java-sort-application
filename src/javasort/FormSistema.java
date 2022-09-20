@@ -110,7 +110,7 @@ public class FormSistema extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Data", "Cidade", "Condição", "Tendencia", "Mínima", "Máxima", "Vento Min", "Vento Max", "Direção Vento"
+                "Data", "Número da Carta", "Nome", "Categoria", "Raridade", "Nível", "Atributo", "Tipo", "Ataque", "Defesa"
             }
         ));
         jScrollPane1.setViewportView(tabelaDados);
@@ -258,6 +258,7 @@ public class FormSistema extends javax.swing.JFrame {
 
     private void btnBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscaActionPerformed
         int cont = 0;
+        int aux = 0;
         switch (cbOrdena.getSelectedIndex()) {
             case 0:
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.ENGLISH);
@@ -267,9 +268,13 @@ public class FormSistema extends javax.swing.JFrame {
                         String tempDate = txtBusca.getText();
                         LocalDate localDate = LocalDate.parse(tempDate, formatter);
                         if (d.getReleaseDate().equals(localDate)) {
-                            JOptionPane.showMessageDialog(null, "Carta encontrada " + cont + " comparações");
+                            JOptionPane.showMessageDialog(null, "Carta encontrada com " + cont + " comparações");
+                            aux++;
                             break;
                         }
+                    }
+                    if (aux == 0) {
+                        JOptionPane.showMessageDialog(null, "Carta não encontrada!");
                     }
                 } else {
                     Dados d = new Dados();
@@ -277,7 +282,11 @@ public class FormSistema extends javax.swing.JFrame {
                     LocalDate localDate = LocalDate.parse(tempDate, formatter);
                     d.setReleaseDate(localDate);
                     int pos = Collections.binarySearch(lista, d, compareDate);
-                    JOptionPane.showMessageDialog(null, "Carta encontrada, posicao " + (pos + 1));
+                    if (pos >= 0) {
+                        JOptionPane.showMessageDialog(null, "Carta encontrada na posição " + (pos + 1));
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Carta não encontrada!");
+                    }
                 }
                 break;
             case 1:
@@ -285,15 +294,23 @@ public class FormSistema extends javax.swing.JFrame {
                     for (Dados d : lista) {
                         cont++;
                         if (d.getEnglishName().equalsIgnoreCase(txtBusca.getText())) {
-                            JOptionPane.showMessageDialog(null, "Carta encontrada " + cont + " comparações");
+                            JOptionPane.showMessageDialog(null, "Carta encontrada com " + cont + " comparações");
+                            aux++;
                             break;
                         }
+                    }
+                    if (aux == 0) {
+                        JOptionPane.showMessageDialog(null, "Carta não encontrada!");
                     }
                 } else {
                     Dados d = new Dados();
                     d.setEnglishName(txtBusca.getText());
                     int pos = Collections.binarySearch(lista, d, compareName);
-                    JOptionPane.showMessageDialog(null, "Carta encontrada, posicao " + (pos + 1));
+                    if (pos >= 0) {
+                        JOptionPane.showMessageDialog(null, "Carta encontrada na posição " + (pos + 1));
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Carta não encontrada!");
+                    }
                 }
                 break;
             case 2:
@@ -301,15 +318,23 @@ public class FormSistema extends javax.swing.JFrame {
                     for (Dados d : lista) {
                         cont++;
                         if ((Integer.parseInt(txtBusca.getText())) == d.getCategory()) {
-                            JOptionPane.showMessageDialog(null, "A primeira carta desta categoria foi encontrada! " + cont + " comparações");
+                            JOptionPane.showMessageDialog(null, "Carta encontrada com " + cont + " comparações");
+                            aux++;
                             break;
                         }
+                    }
+                    if (aux == 0) {
+                        JOptionPane.showMessageDialog(null, "Carta não encontrada!");
                     }
                 } else {
                     Dados d = new Dados();
                     d.setCategory(Integer.parseInt(txtBusca.getText()));
                     int pos = Collections.binarySearch(lista, d, compareCategory);
-                    JOptionPane.showMessageDialog(null, "Carta encontrada, posicao " + (pos + 1));
+                    if (pos >= 0) {
+                        JOptionPane.showMessageDialog(null, "Carta encontrada na posição " + (pos + 1));
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Carta não encontrada!");
+                    }
                 }
                 break;
             case 3:
@@ -317,15 +342,23 @@ public class FormSistema extends javax.swing.JFrame {
                     for (Dados d : lista) {
                         cont++;
                         if ((Integer.parseInt(txtBusca.getText())) == d.getLevel()) {
-                            JOptionPane.showMessageDialog(null, "A primeira carta deste nível foi encontrada! " + cont + " comparações");
+                            JOptionPane.showMessageDialog(null, "Carta encontrada com " + cont + " comparações");
+                            aux++;
                             break;
                         }
                     }
+                    if (aux == 0) {
+                        JOptionPane.showMessageDialog(null, "Carta não encontrada!");
+                    }
                 } else {
                     Dados d = new Dados();
-                    d.setCategory(Integer.parseInt(txtBusca.getText()));
+                    d.setLevel(Integer.parseInt(txtBusca.getText()));
                     int pos = Collections.binarySearch(lista, d, compareLevel);
-                    JOptionPane.showMessageDialog(null, "Carta encontrada, posicao " + (pos + 1));
+                    if (pos >= 0) {
+                        JOptionPane.showMessageDialog(null, "Carta encontrada na posição " + (pos + 1));
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Carta não encontrada!");
+                    }
                 }
                 break;
             case 4:
@@ -333,15 +366,23 @@ public class FormSistema extends javax.swing.JFrame {
                     for (Dados d : lista) {
                         cont++;
                         if ((Integer.parseInt(txtBusca.getText())) == d.getAttack()) {
-                            JOptionPane.showMessageDialog(null, "A primeira carta com este poder de ataque foi encontrada! " + cont + " comparações");
+                            JOptionPane.showMessageDialog(null, "Carta encontrada com " + cont + " comparações");
+                            aux++;
                             break;
                         }
                     }
+                    if (aux == 0) {
+                        JOptionPane.showMessageDialog(null, "Carta não encontrada!");
+                    }
                 } else {
                     Dados d = new Dados();
-                    d.setCategory(Integer.parseInt(txtBusca.getText()));
+                    d.setAttack(Integer.parseInt(txtBusca.getText()));
                     int pos = Collections.binarySearch(lista, d, compareAttack);
-                    JOptionPane.showMessageDialog(null, "Carta encontrada, posicao " + (pos + 1));
+                    if (pos >= 0) {
+                        JOptionPane.showMessageDialog(null, "Carta encontrada na posição " + (pos + 1));
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Carta não encontrada!");
+                    }
                 }
                 break;
             case 5:
@@ -349,15 +390,23 @@ public class FormSistema extends javax.swing.JFrame {
                     for (Dados d : lista) {
                         cont++;
                         if ((Integer.parseInt(txtBusca.getText())) == d.getDefense()) {
-                            JOptionPane.showMessageDialog(null, "A primeira carta com este poder de defesa foi encontrada! " + cont + " comparações");
+                            JOptionPane.showMessageDialog(null, "Carta encontrada com " + cont + " comparações");
+                            aux++;
                             break;
                         }
                     }
+                    if (aux == 0) {
+                        JOptionPane.showMessageDialog(null, "Carta não encontrada!");
+                    }
                 } else {
                     Dados d = new Dados();
-                    d.setCategory(Integer.parseInt(txtBusca.getText()));
+                    d.setDefense(Integer.parseInt(txtBusca.getText()));
                     int pos = Collections.binarySearch(lista, d, compareDefense);
-                    JOptionPane.showMessageDialog(null, "Carta encontrada, posicao " + (pos + 1));
+                    if (pos >= 0) {
+                        JOptionPane.showMessageDialog(null, "Carta encontrada na posição " + (pos + 1));
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Carta não encontrada!");
+                    }
                 }
                 break;
             default:
